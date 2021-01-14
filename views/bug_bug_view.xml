@@ -1,0 +1,68 @@
+<odoo>
+    <data>
+
+        <!--   views    -->
+
+        <!--   list    -->
+        <record model="ir.ui.view" id="view_bug_bug_list">
+            <field name="name">bug.list</field>
+            <field name="model">bug.bug</field>
+            <field name="arch" type="xml">
+                <tree>
+                    <field name="name"/>
+                    <field name="detail"/>
+                    <field name="follower_id" widget="many2many_tags"/>
+                    <field name="is_closed"/>
+                    <field name="close_reason"/>
+                    <field name="user_id"/>
+                </tree>
+            </field>
+        </record>
+
+        <!--   form    -->
+        <record model="ir.ui.view" id="view_bug_bug_form">
+            <field name="name">Bug表单</field>
+            <field name="model">bug.bug</field>
+            <field name="arch" type="xml">
+                <form>
+                    <header>
+                        <button name="do_close" class="btn btn-primary" type="object" string="关闭Bug"/>
+                    </header>
+                    <sheet>
+                        <group name="group_top" col="2">
+                            <group name="group_left">
+                                <field name="user_id"/>
+                                <field name="is_closed" readonly="1"/>
+                            </group>
+                            <group name="group_right">
+                                <field name="name"/>
+                                <field name="close_reason" attrs="{'invisible':[('is_closed', '==', False)]}"/>
+                            </group>
+                        </group>
+                        <group>
+                            <field name="detail"/>
+                        </group>
+                        <group>
+                            <field name="follower_id" widget="many2many_tags"/>
+                        </group>
+                    </sheet>
+                </form>
+            </field>
+        </record>
+
+        <!--   /views    -->
+        <!--   actions     -->
+        <record model="ir.actions.act_window" id="act_bug_bug_view">
+            <field name="name">Bug Manage</field>
+            <field name="res_model">bug.bug</field>
+            <field name="view_mode">tree,form</field>
+            <field name="view_id" ref="view_bug_bug_list"/>
+        </record>
+    </data>
+    <!--   TOP     -->
+    <menuitem id="menu_bug_bug_root" name="Bug管理系统"/>
+    <!--   Categories     -->
+    <menuitem id="menu_bug_bug_category1" name="Bug类别" parent="menu_bug_bug_root"/>
+    <!--   list     -->
+    <menuitem id="menu_bug_bug_list" name="Bug列表" parent="menu_bug_bug_category1" action="act_bug_bug_view"/>
+</odoo>
