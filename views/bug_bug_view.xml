@@ -36,7 +36,7 @@
                             </group>
                             <group name="group_right">
                                 <field name="name"/>
-                                <field name="close_reason" attrs="{'invisible':[('is_closed', '==', False)]}"/>
+                                <field name="close_reason" attrs="{'invisible':[('is_closed', '=', False)]}"/>
                             </group>
                         </group>
                         <group>

@@ -1,0 +1,35 @@
+<odoo>
+    <data>
+        <record model="ir.ui.view" id="view_bug_follower_tree">
+            <field name="name">关注者</field>
+            <field name="model">res.partner</field>
+            <field name="inherit_id" ref="base.view_partner_tree"/>
+            <field name="arch" type="xml">
+                <xpath expr="//field[@name='category_id']" position="after">
+                    <field name="bug_ids"/>
+                </xpath>
+            </field>
+        </record>
+        <record model="ir.ui.view" id="view_bug_follower_form">
+            <field name="name">关注者</field>
+            <field name="model">res.partner</field>
+            <field name="inherit_id" ref="base.view_partner_form"/>
+            <field name="arch" type="xml">
+                <xpath expr="//page[@name='sales_purchases']" position="before">
+                    <page name='bug management' string="Bug列表">
+                        <field name="bug_ids"/>
+                    </page>
+                </xpath>
+            </field>
+        </record>
+
+        <record model="ir.actions.act_window" id="act_bug_follower_tree">
+            <field name="name">follower list</field>
+            <field name="res_model">res.partner</field>
+            <field name="view_mode">tree,form,kanban</field>
+            <field name="view_id" ref="view_bug_follower_tree"/>
+        </record>
+        <menuitem name="关注者管理" id="menu_bug_follower" parent="menu_bug_bug_root"/>
+        <menuitem name="关注者" id="menu_bug_follower_form" parent="menu_bug_follower" action="act_bug_follower_tree"/>
+    </data>
+</odoo>

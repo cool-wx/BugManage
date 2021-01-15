@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<odoo>
+    <template id="bugs_template" name="bugs">
+        <div class="container">
+            <h2>待处理BUGS</h2>
+            <t t-foreach="bugs_open" t-as="bug">
+                <div class="row">
+                    <span t-field="bug.name"/>
+                    <span t-field="bug.detail"/>
+                </div>
+            </t>
+        </div>
+    </template>
+</odoo>

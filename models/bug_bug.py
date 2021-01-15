@@ -19,7 +19,10 @@ class Bug(models.Model):
     @api.onchange('detail')
     def _compute_display_detail(self):
         for rec in self:
-            rec.display_detail = (rec.detail[:20] + '……') if len(rec.detail) > 20 else rec.detail
+            if rec.detail:
+                rec.display_detail = (rec.detail[:20] + '……') if len(rec.detail) > 20 else rec.detail
+            else:
+                rec.display_detail = rec.detail
 
     def do_close(self):
         for bug in self:
